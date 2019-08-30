@@ -47,3 +47,32 @@ const rank = winner => {
         console.log('꽝입니다.')
     }
 }
+
+// rank(winner)
+
+// n = 0
+// while (n < 1000000) {
+//     rank(winner);
+//     n += 1
+// }
+
+const url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=873'
+
+axios.get(url)
+    .then(res => {
+        let winner = []
+
+        // winner.push(res.data.drwtNo1)
+        // winner.push(res.data.drwtNo2)
+        // winner.push(res.data.drwtNo3)
+        // winner.push(res.data.drwtNo4)
+        // winner.push(res.data.drwtNo5)
+        // winner.push(res.data.drwtNo6)
+
+        for (let i = 0; i < 6; i++) {
+            winner.push(res.data[`drwtNo${i+1}`])
+        }
+        
+        console.log(`당첨번호는 ${winner}입니다.`)
+        rank(winner)
+    })
